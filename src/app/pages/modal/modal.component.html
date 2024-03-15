@@ -1,0 +1,95 @@
+<!-- Button trigger modal -->
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add product
+  </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div *ngIf="showProgressBar" class="progress mt-3">
+            <div class="progress-bar" [style.width.%]="progress" role="progressbar" [attr.aria-valuenow]="progress"
+              aria-valuemin="0" aria-valuemax="100">
+              {{ progress }}%
+            </div>
+          </div>
+
+          <form [formGroup]="productForm" (ngSubmit)="saveProduct()" class="row g-2">
+            <div class="col-md-6" *ngIf="!showSecondInputs" class="row g-2">
+              <div class="col-md-6">
+                <label for="nombre">Nombre del producto*</label>
+                <input type="text" class="form-control" id="nombre" autocomplete="true" formControlName="nombre"
+                  placeholder="Write your apellido paterno" (change)="updateProgress()">
+                <div *ngIf="validateInput('nombre')" class="form-text text-danger">
+                  El campo es requerido
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="descripcion">Descripción*</label>
+                <input type="text" class="form-control" id="descripcion" autocomplete="true"
+                  formControlName="descripcion" placeholder="Write your apellido paterno" (change)="updateProgress()">
+                <!-- <div *ngIf="validateInput('descripcion')" class="form-text text-danger">
+                  El campo es requerido
+                </div> -->
+                <div *ngIf="validateInput('descripcion')" class="form-text text-danger">
+                  <span *ngIf="productForm.get('descripcion')?.hasError('required')">Tu desc es requerida.</span>
+                  <span *ngIf="productForm.get('descripcion')?.hasError('minlength')">Deben ser minimo 10
+                    caracteres.</span>
+                </div>
+
+
+              </div>
+            </div>
+
+            <div class="col-md-6" *ngIf="showSecondInputs" class="row g-2">
+              <div class="col-md-6">
+                <label for="stock">Stock*</label>
+                <input type="number" class="form-control" id="stock" autocomplete="true" formControlName="stock"
+                  placeholder="Write your apellido paterno" (change)="updateProgress()">
+                <div *ngIf="validateInput('stock')" class="form-text text-danger">
+                  El campo es requerido
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="categoria">Categoría*</label>
+                <input type="text" class="form-control" id="categoria" autocomplete="true" formControlName="categoria"
+                  placeholder="Write your apellido paterno" (change)="updateProgress()">
+                <div *ngIf="validateInput('categoria')" class="form-text text-danger">
+                  El campo es requerido
+                </div>
+              </div>
+
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-success btn-sm" (click)="goBack()" *ngIf="showSecondInputs">
+                Regresar
+              </button>
+
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                [disabled]="productForm.invalid">Guardar
+                registro</button>
+
+            </div>
+
+
+
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
