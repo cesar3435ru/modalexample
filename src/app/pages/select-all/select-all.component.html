@@ -1,0 +1,54 @@
+<!-- Button trigger modal -->
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add privileges
+    </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+
+
+
+                    <form [formGroup]="myForm" (ngSubmit)="saveCategory()">
+                        <div class="col-md-4">
+                            <label for="nomina">Número de nómina*</label>
+                            <input type="number" class="form-control" id="nomina" autocomplete="true"
+                                placeholder="Número de nomina" formControlName="nomina">
+                            <small *ngIf="validateInput('nomina')" class="form-text text-danger">
+                                El campo es requerido
+                            </small>
+                        </div>
+                        <div *ngFor="let category of categoryList" class="field-checkbox">
+                            <p-checkbox [formControl]="myForm.controls.selectedCategory" [value]="category"
+                                [inputId]="category.value" (onChange)="changeCheckBox();"></p-checkbox>
+                            <label [for]="category.value">{{category.label}}</label>
+                        </div>
+
+                        <button pButton pRipple label="Select All" (click)="selectAll();"
+                            class="p-button-success mr-2"></button>
+                        <button pButton pRipple label="Deselect All" (click)="deselectAll();"
+                            class="p-button-danger"></button>
+
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                            [disabled]="myForm.invalid">Guardar
+                            registro</button>
+                    </form>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

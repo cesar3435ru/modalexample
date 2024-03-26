@@ -1,0 +1,46 @@
+<div class="custom-margin">
+    <br>
+    <h5><strong>Asigna los permisos con responsabilidad*</strong></h5>
+    <div class="modal-body">
+
+        <form [formGroup]="permisosForm" (ngSubmit)="savePermisos()" class="row g-2" enctype="multipart/form-data">
+
+            <div class="col-md-4">
+                <label for="nomina">Número de nómina*</label>
+                <input type="number" class="form-control" id="nomina" autocomplete="true" placeholder="Número de nomina"
+                    formControlName="nomina">
+                <small *ngIf="validateInput('nomina')" class="form-text text-danger">
+                    El campo es requerido
+                </small>
+            </div>
+
+            <div *ngFor="let modulo of dataInfo | keyvalue">
+                <h2>{{ modulo.key }}</h2>
+                <li *ngFor="let operacion of modulo.value">
+                    <label>
+                        <input id="flexCheckDefault" type="checkbox" (change)="toggleOperacion(operacion.id)"
+                            (change)="onChangeData($event);"> {{ operacion.descripcion }}
+                    </label>
+                    
+                </li>
+
+
+            </div>
+
+            <button (click)="marcarTodos()">Marcar Todos</button>
+
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" [disabled]="permisosForm.invalid"><i
+                        class="fa-solid fa-paper-plane"></i> Guardar
+                    permisos</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+
+  

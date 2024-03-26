@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { ModalComponent } from './pages/modal/modal.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { CheckboxComponent } from './pages/checkbox/checkbox.component';
+import { SelectAllComponent } from './pages/select-all/select-all.component';
 
 export const routes: Routes = [
     {
@@ -11,6 +13,14 @@ export const routes: Routes = [
     {
         path: 'modal',
         component: ModalComponent
+    },
+    {
+        path: 'checkbox',
+        component: CheckboxComponent
+    },
+    {
+        path: 'category',
+        component: SelectAllComponent
     },
     {
         path: '**',
