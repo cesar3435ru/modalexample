@@ -1,0 +1,15 @@
+<h1>Hello world</h1>
+<ng-container *ngIf="selectedCheckboxes.length > 0">
+    {{selectedCheckboxes.length}} Items are selected 
+</ng-container>
+<br>
+
+<input type="checkbox" name="all" [(ngModel)]="selectAll" (change)="toggleSelectAll();" id="all" />
+Select All
+
+<div *ngFor="let item of checkboxes" class="field-checkbox">
+    <input type="checkbox" name="cesar" id="cesar" [(ngModel)]="item.selected" (change)="checkboxChanged();" />
+    {{item.title}}
+</div>
+
+<button (click)="onClick()">Submit</button>
