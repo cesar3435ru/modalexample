@@ -25,7 +25,7 @@ export const routes: Routes = [
     },
 
     {
-        path: 'multiple',
+        path: 'multiple', //Es el unico que se acopla a mis necesidades
         component: MultipleComponent
     },
     {

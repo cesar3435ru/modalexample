@@ -1,15 +1,106 @@
-<h1>Hello world</h1>
+<!-- <h6>Assign privileges with responsability.</h6>
+<input type="text" name="username" [(ngModel)]="username" placeholder="Enter your username" (blur)="validateUsername()">
+<div *ngIf="isUsernameRequired && isUsernameTouched" class="error-message">El nombre de usuario es requerido</div>
+
+<br>
 <ng-container *ngIf="selectedCheckboxes.length > 0">
-    {{selectedCheckboxes.length}} Items are selected 
+    {{selectedCheckboxes.length}} Items are selected
 </ng-container>
 <br>
-
 <input type="checkbox" name="all" [(ngModel)]="selectAll" (change)="toggleSelectAll();" id="all" />
 Select All
 
-<div *ngFor="let item of checkboxes" class="field-checkbox">
+<div *ngFor="let item of checkboxes; let i = index" class="field-checkbox">
     <input type="checkbox" name="cesar" id="cesar" [(ngModel)]="item.selected" (change)="checkboxChanged();" />
     {{item.title}}
 </div>
+<button class="btn btn-success" (click)="onClick()" [disabled]="!isFormValid()">Submit</button> -->
 
-<button (click)="onClick()">Submit</button>
+
+
+<!-- Button trigger modal -->
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add privileges
+    </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Assign privileges with responsability.</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-2">
+
+                    <div class="col-md-12">
+                        <label for="nombre">Username*</label>
+                        <input type="text" class="form-control" id="name" autocomplete="true" [(ngModel)]="username"
+                            placeholder="Write your username" (blur)="validateUsername()"
+                            [ngClass]="{'is-invalid': isUsernameRequired() && isUsernameTouched}">
+                        <div *ngIf="isUsernameRequired() && isUsernameTouched" class="error-message form-text text-danger">
+                            This input is required.
+                        </div>
+                        <div *ngIf="isUsernameLengthExceeded()" class="error-message form-text text-danger">
+                            Maximum 20 characters allowed.
+                        </div>
+                    </div>
+                    
+
+
+                    <div class="col-md-12">
+                        <label for="employee_id">ID Employee*</label>
+                        <input type="number" class="form-control" id="employee_id" autocomplete="true"
+                            [(ngModel)]="employee_id" placeholder="Write your ID" (blur)="validateEmployee()"
+                            [ngClass]="{'is-invalid': isEmployeeInvalid()}">
+                        <div *ngIf="isEmployeeInvalid()" class="error-message" class="form-text text-danger">
+                            This input is required and must be positive numbers between 4 and 7 digits.
+                        </div>
+                    </div>
+
+
+
+                    <br>
+                    <div class="col-md-12">
+                        <ng-container *ngIf="selectedCheckboxes.length > 0">
+                            {{selectedCheckboxes.length}} Items are selected
+                        </ng-container>
+                        <br>
+
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                [(ngModel)]="selectAll" (change)="toggleSelectAll();">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Select / Deselect All
+                            </label>
+                        </div>
+
+                        <div class="form-check" *ngFor="let item of checkboxes; let i = index">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefaultTwo"
+                                (change)="checkboxChanged();" [(ngModel)]="item.selected">
+                            <label class="form-check-label" for="flexCheckDefaultTwo">
+                                {{item.title}}
+                            </label>
+                        </div>
+
+                        <div class="error-message" class="form-text text-danger">
+                            You must click at least one checkbox.
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success" (click)="onClick()" [disabled]="!isFormValid()"
+                        data-bs-dismiss="modal" aria-label="Close">Submit</button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
