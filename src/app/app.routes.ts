@@ -4,6 +4,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CheckboxComponent } from './pages/checkbox/checkbox.component';
 import { SelectAllComponent } from './pages/select-all/select-all.component';
 import { MultipleComponent } from './pages/multiple/multiple.component';
+import { ArraysComponent } from './pages/arrays/arrays.component';
 
 export const routes: Routes = [
     {
@@ -27,6 +28,10 @@ export const routes: Routes = [
     {
         path: 'multiple', //Es el unico que se acopla a mis necesidades
         component: MultipleComponent
+    },
+    {
+        path: 'arrays', //Es el unico que se acopla a mis necesidades
+        component: ArraysComponent
     },
     {
         path: '**',
