@@ -1,1 +1,42 @@
-<p>archivecategories works!</p>
+<br>
+<div class="container">
+    <br>
+    <div class="table-responsive" *ngIf="archiveCategories && archiveCategories.length !== 0">
+        <table id="categories" class="table table-striped table-hover table-bordered shadow-lg mt-4" style="width:100%">
+            <thead class="table-dark text-white">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">IsActive</th>
+
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cat of archiveCategories; let i = index">
+
+                    <td>{{i + 1}}</td>
+                    <td>{{cat.title}}</td>
+                    <td> <span class="texto-marcado" *ngIf="cat.active === 0">NO</span>
+                    </td>
+                    <td>
+
+                        <button class="btn btn-outline-success btn-md" type="submit" (click)="activeCategory(cat.id);"><i
+                                class="fa-solid fa-check"></i>
+                            Active</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div *ngIf="archiveCategories && archiveCategories.length === 0"
+        class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Hoops!</strong> No categories yet.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+
+</div>

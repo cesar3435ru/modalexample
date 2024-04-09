@@ -31,7 +31,6 @@ export class CategoriesComponent {
   });
 
 
-
   validateInput(input: string) {
     const control = this.categoryForm.get(input);
 
@@ -100,7 +99,9 @@ export class CategoriesComponent {
     this.category.archiveCategoryById(id).subscribe({
       next: (response: any) => {
         console.log('GOOD!');
+        this.activeCategories = this.activeCategories.filter(cat => cat.id !== id); // Filter out archived category
         this.category.activeCategoriesSubject.next();
+        this.category.archiveCategoriesSubject.next(); // Emit after filtering
       },
       error: (error: any) => {
         console.log(error);

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,12 @@ import { Observable, Subject } from 'rxjs';
 export class CategoryService {
 
   constructor(private http: HttpClient) { }
-
+  //CUALQUIERA DE ESTAS DOS FORMAS SE PUEDE USAR:
   public activeCategoriesSubject: Subject<void> = new Subject<void>();
   public archiveCategoriesSubject: Subject<void> = new Subject<void>();
+
+  // public activeCategoriesSubject: BehaviorSubject<void> = new BehaviorSubject<void>(undefined);
+  // public archiveCategoriesSubject: BehaviorSubject<void> = new BehaviorSubject<void>(undefined);
 
 
   url: string = 'http://localhost:8000';
@@ -37,7 +40,7 @@ export class CategoryService {
   }
 
   listOfArchiveCategories() {
-    return this.http.get(this.url + '/api/archivecategories');
+    return this.http.get(this.url + '/api/inactivecategories');
   }
 
   archiveCategoryById(id: number) {
