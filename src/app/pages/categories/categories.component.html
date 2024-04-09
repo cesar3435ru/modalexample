@@ -1,0 +1,93 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add category
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div *ngIf="showProgressBar" class="progress mt-3">
+            <div class="progress-bar" [style.width.%]="progress" role="progressbar" [attr.aria-valuenow]="progress"
+              aria-valuemin="0" aria-valuemax="100">
+              {{ progress }}%
+            </div>
+          </div>
+
+          <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()" class="row g-2">
+            <div class="col-md-12">
+              <label for="title">Category name*</label>
+              <input type="text" class="form-control" id="title" autocomplete="true" formControlName="title"
+                placeholder="Write your category" (change)="updateProgress()">
+              <div *ngIf="validateInput('title')" class="form-text text-danger">
+                The field is required.
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                [disabled]="categoryForm.invalid">Submit info</button>
+
+            </div>
+
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<br>
+<div class="container">
+    <br>
+    <!-- datatable [dtOptions]="dtOptions" -->
+    <div class="table-responsive" *ngIf="activeCategories &&activeCategories.length !== 0">
+        <table  id="categories"
+            class="table table-striped table-hover table-bordered shadow-lg mt-4" style="width:100%">
+            <thead class="table-dark text-white">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">IsActive</th>
+                
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cat of activeCategories">
+
+                    <td>{{cat.title}}</td>
+                    <td> <span class="texto-marcado" *ngIf="cat.active === 1">YES</span>
+                    </td>
+                    <td>
+                      
+                        <button class="btn btn-outline-danger btn-md" type="submit"
+                            (click)="archiveCategory(cat.id);"><i class="fa-solid fa-down-long"></i>
+                            Archivar</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+
+</div>
+<div *ngIf="activeCategories && activeCategories.length === 0" class="alert alert-success alert-dismissible fade show"
+    role="alert">
+    <strong>Hoops!</strong> No categories yet.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

@@ -3,32 +3,23 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-arrays',
+  selector: 'app-dinamic-checkboxes',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
-  templateUrl: './arrays.component.html',
-  styleUrl: './arrays.component.scss'
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  templateUrl: './dinamic-checkboxes.component.html',
+  styleUrl: './dinamic-checkboxes.component.scss'
 })
-export class ArraysComponent {
-
+export class DinamicCheckboxesComponent {
+  
   selectAll = false;
-  operations = [1, 2, 3]
   checkboxes = [
-    { id: 1, title: 'One', selected: false },
-    { id: 2, title: 'Two', selected: false },
+    { id: 1, title: 'One', selected: true },
+    { id: 2, title: 'Two', selected: true },
     { id: 3, title: 'Three', selected: false },
     { id: 4, title: 'Four', selected: false },
     { id: 5, title: 'Five', selected: false }
   ]
 
-  ngOnInit(): void {
-    this.checkboxes.forEach(checkbox => {
-      if (this.operations.includes(checkbox.id)) {
-        checkbox.selected = true;
-      }
-    });
-    this.checkboxChanged();
-  }
 
   toggleSelectAll() {
     this.checkboxes.forEach((c) => (c.selected = this.selectAll));
@@ -44,24 +35,19 @@ export class ArraysComponent {
   }
 
   onClick() {
+    // Obtener los checkboxes seleccionados actualmente
     let selectedCheckboxes = this.selectedCheckboxes;
     console.log(selectedCheckboxes);
-
-    // Limpiar selecciones existentes
-    this.checkboxes.forEach(checkbox => checkbox.selected = false);
-
-    // Marcar solo los checkboxes cuyos IDs coincidan con los IDs en operations
+  
+    // Desmarcar solo los checkboxes que están seleccionados
     this.checkboxes.forEach(checkbox => {
-      if (this.operations.includes(checkbox.id)) {
-        checkbox.selected = true;
+      if (checkbox.selected) {
+        checkbox.selected = false;
       }
     });
-
     this.selectAll = false;
   }
-
-
-
+  
 
 
   isFormValid(): boolean {
@@ -79,10 +65,6 @@ export class ArraysComponent {
 
   get selectedCheckboxes() {
     return this.checkboxes.filter((c) => c.selected)
-  }
-
-  isSelected(id: number): boolean {
-    return this.operations.includes(id);
   }
 
 

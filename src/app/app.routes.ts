@@ -5,6 +5,9 @@ import { CheckboxComponent } from './pages/checkbox/checkbox.component';
 import { SelectAllComponent } from './pages/select-all/select-all.component';
 import { MultipleComponent } from './pages/multiple/multiple.component';
 import { ArraysComponent } from './pages/arrays/arrays.component';
+import { DinamicCheckboxesComponent } from './pages/dinamic-checkboxes/dinamic-checkboxes.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { ArchivecategoriesComponent } from './pages/archivecategories/archivecategories.component';
 
 export const routes: Routes = [
     {
@@ -32,6 +35,18 @@ export const routes: Routes = [
     {
         path: 'arrays', //Es el unico que se acopla a mis necesidades
         component: ArraysComponent
+    },
+    {
+        path: 'magic', //Es el unico que se acopla a mis necesidades
+        component: DinamicCheckboxesComponent
+    },
+    {
+        path: 'categories',
+        component: CategoriesComponent
+    },
+    {
+        path: 'archivecategories',
+        component: ArchivecategoriesComponent
     },
     {
         path: '**',
